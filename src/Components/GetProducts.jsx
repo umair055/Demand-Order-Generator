@@ -106,7 +106,9 @@ const GetProducts = () => {
 
   const FetchAllProductsFormDB = () => {
     axios
-      .get("http://localhost:5000/demand-order-generator/all-products")
+      .get(
+        "https://shy-bull-cloak.cyclic.app/demand-order-generator/all-products"
+      )
       .then((res) => setAllProducts(res.data));
   };
 
