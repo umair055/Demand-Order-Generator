@@ -20,18 +20,14 @@ const TableToDownload = () => {
 
   const containerRef = useRef(null);
   const handleDownload = () => {
-    const container = containerRef.current;
-    const containerWidth = 1000;
-    const containerHeight = container.offsetHeight;
-    html2canvas(container, {
-      useCORS: true,
-      allowTaint: true,
-      dpi: window.devicePixelRatio * 600,
-    }).then((canvas) => {
+    const input = document.getElementById("myDiv");
+    const containerWidth = 210;
+    const containerHeight = 200;
+    html2canvas(input, {}).then((canvas) => {
       const imgData = canvas.toDataURL("image/jpeg", 1);
       const pdf = new jsPDF({
-        orientation: "l",
-        unit: "px",
+        orientation: "p",
+        unit: "mm",
         format: [containerWidth, containerHeight],
       });
       pdf.addImage(
@@ -50,7 +46,18 @@ const TableToDownload = () => {
 
   return (
     <Box>
-      <Box ref={containerRef} sx={{ pb: 4 }}>
+      <Box
+        ref={containerRef}
+        id="myDiv"
+        sx={{
+          minHeight: "257mm",
+          width: "250mm",
+          marginLeft: "auto",
+          marginRight: "auto",
+          pl: 1,
+          pr: 4,
+        }}
+      >
         <Box sx={{ display: "flex" }}>
           <img
             src={NTLogo}
